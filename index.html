@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdvancedCalculator</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- External Librabies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.0.0/math.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/algebrite@1.4.0/dist/algebrite.bundle-for-browser.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Header with Toggle Theme -->
+    <header class="header">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <rect x="4" y="4" width="16" height="16" rx="2" />
+          <rect x="9" y="9" width="1" height="1" />
+          <rect x="14" y="9" width="1" height="1" />
+          <rect x="9" y="14" width="6" height="1" />
+        </svg>
+        <h1>Advanced Calculator</h1>
+      </div>
+      <div class="button">
+        <button id="history-toggle" class="history-toggle" title="Show History">
+          <svg width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor">
+            <path d="M480-120q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q117 0 198.5-81.5T760-480q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120v-240h80v94q51-64 124.5-99T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z" />
+          </svg>
+        </button>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="basic">Basic</button>
+      <button class="tab-btn" data-tab="scientific">Scientific</button>
+      <button class="tab-btn" data-tab="geometry">Geometry</button>
+      <button class="tab-btn" data-tab="matrix">Matrix</button>
+      <button class="tab-btn" data-tab="calculus">Calculus</button>
+    </nav>
+
+  </div>
+
+  <!-- Tab Content Container -->
+  <main class="tab-content">
+
+    <!-- Basic Calculator -->
+    <div id="basic" class="tab-panel active">
+      <div class="basic-calculator">
+        <div class="basic-calculator-display">
+          <div id="basic-preview-display" class="basic-preview-display">0</div>
+          <div class="basic-input-box">
+            <textarea id="basic-input" class="basic-input" placeholder="0"></textarea>
+          </div>
+        </div>
+        <div class="basic-button-grid">
+          <button class="basic-btn clear">C</button>
+          <button class="basic-btn operator">⌫</button>
+          <button class="basic-btn operator">Ans</button>
+          <button class="basic-btn operator">÷</button>
+
+          <button class="basic-btn number">7</button>
+          <button class="basic-btn number">8</button>
+          <button class="basic-btn number">9</button>
+          <button class="basic-btn operator">x</button>
+
+          <button class="basic-btn number">4</button>
+          <button class="basic-btn number">5</button>
+          <button class="basic-btn number">6</button>
+          <button class="basic-btn operator">-</button>
+
+          <button class="basic-btn number">1</button>
+          <button class="basic-btn number">2</button>
+          <button class="basic-btn number">3</button>
+          <button class="basic-btn operator">+</button>
+
+          <button class="basic-btn operator">%</button>
+          <button class="basic-btn number">0</button>
+          <button class="basic-btn number">.</button>
+          <button class="basic-btn equals">=</button>
+        </div>
+      </div>
+      <div id="history-box" class="history-box">
+        <h3>History</h3>
+        <button id="clear-history" class="clear-history" title="Clear History">
+          <svg width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor">
+            <path d="m656-120-56-56 84-84-84-84 56-56 84 84 84-84 56 56-83 84 83 84-56 56-84-83-84 83Zm-176 0q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q11 0 20.5-.5T520-203v81q-10 1-19.5 1.5t-20.5.5ZM120-560v-240h80v94q51-64 124.5-99T480-840q150 0 255 105t105 255h-80q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120Zm414 190-94-94v-216h80v184l56 56-42 70Z" />
+          </svg>
+        </button>
+        <ul id="basic-history-list"></ul>
+      </div>
+    </div>
+
+    <!-- Scientific Calculator -->
+    <div id="scientific" class="tab-panel">
+      <div class="scientific-calculator">
+        <div class="scientific-calculator-display">
+          <div id="scientific-preview-display" class="scientific-preview-display">0</div>
+          <div class="scientific-input-box">
+            <textarea id="scientific-input" class="scientific-input" placeholder="0"></textarea>
+          </div>
+        </div>
+        <div class="scientific-angle">
+          <button class="angle-mode">DEG</button>
+          <button class="angle-mode">RAD</button>
+        </div>
+        <div class="scientific-button-grid">
+          <button class="scientific-btn clear">C</button>
+          <button class="scientific-btn operator">⌫</button>
+          <button class="scientific-btn function">(</button>
+          <button class="scientific-btn function">)</button>
+
+          <button class="scientific-btn function">sin</button>
+          <button class="scientific-btn function">cos</button>
+          <button class="scientific-btn function">tan</button>
+          <button class="scientific-btn function">π</button>
+
+          <button class="scientific-btn function">sin⁻¹</button>
+          <button class="scientific-btn function">cos⁻¹</button>
+          <button class="scientific-btn function">tan⁻¹</button>
+          <button class="scientific-btn function">e</button>
+
+          <button class="scientific-btn function">xʸ</button>
+          <button class="scientific-btn function">ⁿ√x</button>
+          <button class="scientific-btn function">mod</button>
+          <button class="scientific-btn function">logₙ</button>
+
+          <button class="scientific-btn operator">Ans</button>
+          <button class="scientific-btn operator">x!</button>
+          <button class="scientific-btn operator">%</button>
+          <button class="scientific-btn operator">÷</button>
+
+          <button class="scientific-btn number">7</button>
+          <button class="scientific-btn number">8</button>
+          <button class="scientific-btn number">9</button>
+          <button class="scientific-btn operator">x</button>
+
+          <button class="scientific-btn number">4</button>
+          <button class="scientific-btn number">5</button>
+          <button class="scientific-btn number">6</button>
+          <button class="scientific-btn operator">-</button>
+
+          <button class="scientific-btn number">1</button>
+          <button class="scientific-btn number">2</button>
+          <button class="scientific-btn number">3</button>
+          <button class="scientific-btn operator">+</button>
+
+          <button class="scientific-btn number">,</button>
+          <button class="scientific-btn number">0</button>
+          <button class="scientific-btn number">.</button>
+          <button class="scientific-btn equals">=</button>
+        </div>
+      </div>
+      <div id="history-box" class="history-box">
+        <h3>History</h3>
+        <button id="clear-history" class="clear-history" title="Clear History">
+          <svg width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor">
+            <path d="m656-120-56-56 84-84-84-84 56-56 84 84 84-84 56 56-83 84 83 84-56 56-84-83-84 83Zm-176 0q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q11 0 20.5-.5T520-203v81q-10 1-19.5 1.5t-20.5.5ZM120-560v-240h80v94q51-64 124.5-99T480-840q150 0 255 105t105 255h-80q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120Zm414 190-94-94v-216h80v184l56 56-42 70Z" />
+          </svg>
+        </button>
+        <ul id="scientific-history-list"></ul>
+      </div>
+    </div>
+
+    <!-- Geometry Calculator -->
+    <div id="geometry" class="tab-panel">
+      <div class="geometry-calculator">
+        <div class="geometry-type">
+          <button class="geometry-mode" data-type="area">Area</button>
+          <button class="geometry-mode" data-type="volume">Volume</button>
+        </div>
+        <div class="geometry-shape-selector">
+          <label for="geometry-shape-select">Shape:</label>
+          <select id="geometry-shape-select" class="geometry-shape-select" onchange="changeGeometryShape()"></select>
+        </div>
+        <div id="geometry-inputs" class="geometry-inputs"></div>
+        <div class="geometry-result-display">
+          <div id="geometry-formula-display" class="geometry-formula">Formula: </div>
+          <div id="geometry-result" class="geometry-result">Result: 0</div>
+        </div>
+        <button class="geometry-btn calculate" onclick="calculateGeometry()">Calculate</button>
+      </div>
+      <div id="history-box" class="history-box">
+        <h3>History</h3>
+        <button id="clear-history" class="clear-history" title="Clear History">
+          <svg width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor">
+            <path
+              d="m656-120-56-56 84-84-84-84 56-56 84 84 84-84 56 56-83 84 83 84-56 56-84-83-84 83Zm-176 0q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q11 0 20.5-.5T520-203v81q-10 1-19.5 1.5t-20.5.5ZM120-560v-240h80v94q51-64 124.5-99T480-840q150 0 255 105t105 255h-80q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120Zm414 190-94-94v-216h80v184l56 56-42 70Z" />
+          </svg>
+        </button>
+        <ul id="geometry-history-list"></ul>
+      </div>
+    </div>
+
+    <!-- Matrix Calculator -->
+    <div id="matrix" class="tab-panel">
+      <div class="matrix-calculator">
+        <div class="matrix-size">
+          <button class="matrix-size-btn" data-size="2">2x2</button>
+          <button class="matrix-size-btn" data-size="3">3x3</button>
+          <button class="matrix-size-btn" data-size="4">4x4</button>
+        </div>
+        <div class="matrix-operation-selector">
+          <label for="matrix-operation">Operation:</label>
+          <select id="matrix-operation" class="matrix-operation" onchange="changeMatrixOperation()">
+            <option value="add">Addition</option>
+            <option value="subtract">Subtraction</option>
+            <option value="multiply">Multiplication</option>
+            <option value="determinant">Determinant</option>
+            <option value="inverse">Inverse</option>
+          </select>
+        </div>
+        <div id="matrix-inputs" class="matrix-inputs"></div>
+        <div class="matrix-result-display">
+          <div id="matrix-result-display" class="matrix-result">Result will appear here</div>
+        </div>
+        <button class="matrix-btn calculate" onclick="calculateMatrix()">Calculate</button>
+      </div>
+      <div id="history-box" class="history-box">
+        <h3>History</h3>
+        <button id="clear-history" class="clear-history" title="Clear History">
+          <svg width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor">
+            <path d="m656-120-56-56 84-84-84-84 56-56 84 84 84-84 56 56-83 84 83 84-56 56-84-83-84 83Zm-176 0q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q11 0 20.5-.5T520-203v81q-10 1-19.5 1.5t-20.5.5ZM120-560v-240h80v94q51-64 124.5-99T480-840q150 0 255 105t105 255h-80q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120Zm414 190-94-94v-216h80v184l56 56-42 70Z" />
+          </svg>
+        </button>
+        <ul id="matrix-history-list"></ul>
+      </div>
+    </div>
+
+    <!-- Calculus Calculator -->
+    <div id="calculus" class="tab-panel">
+      <div class="calculus-calculator">
+        <div class="calculus-mode">
+          <button class="calculus-mode-btn" data-mode="differentiation">Differentiation</button>
+          <button class="calculus-mode-btn" data-mode="integration">Integration</button>
+        </div>
+        <div class="input-group">
+          <label for="calculus-input">Function f(x):</label>
+          <input type="text" id="calculus-input" placeholder="e.g., x^2 + 3*x + 1" class="function-input">
+        </div>
+        <div id="integration-options" class="integration-options" style="display: none;">
+          <div class="integration-type">
+            <input type="radio" id="indefinite" name="int-type" value="indefinite" checked>
+            <label for="indefinite">Indefinite Integral</label>
+            <input type="radio" id="definite" name="int-type" value="definite">
+            <label for="definite">Definite Integral</label>
+          </div>
+          <div id="limits-input" class="limits-container" style="display: none;">
+            <div class="input-group">
+              <label for="lower-limit">Lower limit (a):</label>
+              <input type="number" id="lower-limit" step="any" class="limit-input">
+            </div>
+            <div class="input-group">
+              <label for="upper-limit">Upper limit (b):</label>
+              <input type="number" id="upper-limit" step="any" class="limit-input">
+            </div>
+          </div>
+        </div>
+        <div id="calculus-help" class="help-text">
+          <p>Supported functions: x^n, sin(x), cos(x), tan(x), e^x, ln(x), log(x)</p>
+          <p>Use * for multiplication, ^ for power, and standard operators (+, -, *, /)</p>
+        </div>
+        <button class="calculus-btn calculate">Calculate</button>
+        <div class="result-container">
+          <div id="calculus-result" class="result">Result: </div>
+        </div>
+      </div>
+      <div id="history-box" class="history-box">
+        <h3>History</h3>
+        <button id="clear-history" class="clear-history" title="Clear History">
+          <svg width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor">
+            <path d="m656-120-56-56 84-84-84-84 56-56 84 84 84-84 56 56-83 84 83 84-56 56-84-83-84 83Zm-176 0q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q11 0 20.5-.5T520-203v81q-10 1-19.5 1.5t-20.5.5ZM120-560v-240h80v94q51-64 124.5-99T480-840q150 0 255 105t105 255h-80q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120Zm414 190-94-94v-216h80v184l56 56-42 70Z" />
+          </svg>
+        </button>
+        <ul id="calculus-history-list"></ul>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="script.js"></script>
+  <script src="modules/basic.js"></script>
+  <script src="modules/scientific.js"></script>
+  <script src="modules/geometry.js"></script>
+  <script src="modules/matrix.js"></script>
+  <script src="modules/calculus.js"></script>
+
+</body>
+</html>

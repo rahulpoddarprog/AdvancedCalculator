@@ -1,0 +1,864 @@
+/* CSS Custom Properties */
+
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Fredoka:wght@300..700&family=Noto+Sans+Math&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --surface-color: #f8f9fa;
+  --border-color: #dee2e6;
+  --denger-color: #dc3545;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+html.dark-theme {
+  --bg-color: #1a1a1a;
+  --text-color: #ffffff;
+  --primary-color: #0d6efd;
+  --secondary-color: #6c757d;
+  --surface-color: #2d2d2d;
+  --border-color: #404040;
+  --denger-color: #dc3545;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+body {
+  font-family: "Fredoka", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+  margin: 5px;
+  padding: 5px;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon {
+  width: clamp(40px, 10vw, 50px);
+}
+
+.logo h1 {
+  font-size: clamp(1.2rem, 5vw, 2.7rem);
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 5px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+}
+
+.history-toggle {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  margin: 10px;
+}
+
+.history-box {
+  display: none;
+  margin: 10px auto;
+  padding: 20px;
+  background-color: var(--surface-color);
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  width: clamp(100px, 85vw, 600px);
+}
+
+.history-box.open {
+  display: block;
+}
+
+.history-box h3 {
+  text-align: center;
+  font-weight: 500;
+  padding: 5px;
+}
+
+.clear-history {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  margin: -35px 0px 0px 0px;
+  position: absolute;
+}
+
+.history-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.history-box li {
+  padding: 5px;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.theme-toggle {
+  background: none;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-color);
+  width: clamp(40px, 10vw, 45px);
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--primary-color);
+  transform: rotate(180deg);
+}
+
+/* Navigation Section */
+.nav-tabs {
+  margin: 10px;
+  padding: 5px;
+  display: flex;
+  gap: 5px;
+  background-color: var(--surface-color);
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  min-width: fit-content;
+  flex: 1;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  font-family: "Domine", serif;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  font-weight: 500;
+  color: var(--text-color);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+  background-color: var(--bg-color);
+}
+
+.tab-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.tab-btn.active {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  box-shadow: var(--shadow);
+}
+
+/* Tab Content Section */
+.tab-content {
+  min-width: fit-content;
+}
+
+.tab-panel {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Basic Calculator */
+.basic-calculator {
+  margin: 0 auto;
+  padding: 20px;
+  width: clamp(100px, 85vw, 600px);
+  background-color: var(--surface-color);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.basic-calculator-display {
+  margin: 10px 0;
+  padding: 10px;
+  height: 150px;
+  width: 100%;
+  border: 2px solid var(--border-color);
+  border-radius: 15px;
+  background-color: var(--bg-color);
+}
+
+.basic-preview-display {
+  padding: 5px;
+  font-family: "Domine", serif;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.basic-input-box {
+  margin: 0;
+  padding: 0;
+  height: 95px;
+  width: 100%;
+  background-color: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+}
+
+.basic-input {
+  box-sizing: border-box;
+  resize: none;
+  padding: 5px;
+  width: 100%;
+  height: 100%;
+  border-color: var(--border-color);
+  border-radius: 10px;
+  background-color: var(--bg-color);
+  text-align: right;
+  font-family: "Noto Sans Math", sans-serif;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.basic-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.basic-button-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.basic-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  font-family: "Domine", serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.basic-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.basic-btn:active {
+  transform: translateY(0);
+}
+
+.basic-btn.clear {
+  background-color: var(--denger-color);
+  color: white;
+}
+
+.basic-btn.operator {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.basic-btn.number {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+}
+
+.basic-btn.equals {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Scientific Calculator */
+.scientific-calculator {
+  margin: 0 auto;
+  padding: 20px;
+  width: clamp(100px, 85vw, 600px);
+  background-color: var(--surface-color);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.scientific-calculator-display {
+  margin: 10px 0;
+  padding: 10px;
+  height: 150px;
+  width: 100%;
+  border: 2px solid var(--border-color);
+  border-radius: 15px;
+  background-color: var(--bg-color);
+}
+
+.scientific-preview-display {
+  padding: 5px;
+  font-family: "Domine", serif;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.scientific-input-box {
+  margin: 0;
+  padding: 0;
+  height: 95px;
+  width: 100%;
+  background-color: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+}
+
+.scientific-input {
+  box-sizing: border-box;
+  resize: none;
+  padding: 5px;
+  width: 100%;
+  height: 100%;
+  border-color: var(--border-color);
+  border-radius: 10px;
+  background-color: var(--bg-color);
+  text-align: right;
+  font-family: "Noto Sans Math", sans-serif;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.scientific-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.scientific-angle {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.angle-mode {
+  border: none;
+  border-radius: 5px;
+  font-family: "Domine", serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 5px;
+}
+
+.angle-mode:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.angle-mode:active {
+  transform: translateY(0);
+}
+
+.angle-mode.active {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: var(--shadow-hover);
+}
+
+.scientific-button-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.scientific-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  font-family: "Domine", serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.scientific-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.scientific-btn:active {
+  transform: translateY(0);
+}
+
+.scientific-btn.clear {
+  background-color: var(--denger-color);
+  color: white;
+}
+
+.scientific-btn.operator {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.scientific-btn.number {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+}
+
+.scientific-btn.equals {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Geometry Calculator */
+.geometry-calculator {
+  margin: 0 auto;
+  padding: 20px;
+  width: clamp(100px, 85vw, 600px);
+  background-color: var(--surface-color);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.geometry-type {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.geometry-mode {
+  border: none;
+  border-radius: 5px;
+  font-family: "Domine", serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 10px;
+}
+
+.geometry-mode:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.geometry-mode:active {
+  transform: translateY(0);
+}
+
+.geometry-mode.active {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: var(--shadow-hover);
+}
+
+.geometry-shape-selector {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.geometry-shape-selector label {
+  width: 100px;
+  font-weight: 500;
+}
+
+.geometry-shape-selector select {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "Domine", serif;
+}
+
+.geometry-inputs {
+  padding: 10px;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.input-row label {
+  width: 150px;
+  font-weight: 400;
+}
+
+.input-row input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.geometry-result-display {
+  padding: 15px;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid var(--border-color);
+  border-radius: 15px;
+  background-color: var(--bg-color);
+}
+
+.geometry-formula {
+  padding: 5px;
+  font-family: "Noto Sans Math", sans-serif;
+  color: var(--text-color);
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.geometry-result {
+  padding: 5px;
+  font-family: "Domine", serif;
+  color: var(--text-color);
+  font-weight: 800;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.geometry-btn.calculate {
+  border: none;
+  border-radius: 5px;
+  font-family: "Domine", serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 10px;
+  padding: 10px;
+}
+
+.geometry-btn.calculate:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.geometry-btn.calculate:active {
+  transform: translateY(0);
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: var(--shadow-hover);
+}
+
+/* Matrix Calculator */
+.matrix-calculator {
+  margin: 0 auto;
+  padding: 20px;
+  width: clamp(100px, 85vw, 600px);
+  background-color: var(--surface-color);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.matrix-size {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  padding: 10px;
+}
+
+.matrix-size-btn,
+.matrix-btn.calculate {
+  border: none;
+  border-radius: 5px;
+  font-family: "Domine", serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 10px 15px;
+}
+
+.matrix-btn.calculate {
+  margin: 10px;
+  padding: 10px 20px;
+}
+
+.matrix-size-btn:hover,
+.matrix-btn.calculate:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.matrix-size-btn:active,
+.matrix-btn.calculate:active {
+  transform: translateY(0);
+}
+
+.matrix-size-btn.active,
+.matrix-btn.calculate:active {
+  background-color: var(--primary-color);
+  color: #fff;
+  box-shadow: var(--shadow-hover);
+}
+
+.matrix-operation-selector {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.matrix-operation-selector label {
+  width: 100px;
+  font-weight: 500;
+}
+
+.matrix-operation {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font: 1rem "Domine", serif;
+}
+
+.matrix-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.matrix {
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.matrix-grid {
+  display: grid;
+  gap: 8px;
+  justify-content: center;
+}
+
+.matrix-inputs {
+  padding: 10px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.matrix-inputs input {
+  width: 60px;
+  height: 40px;
+  text-align: center;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font: 1rem "Domine", serif;
+}
+
+.matrix-result-display {
+  padding: 15px;
+  min-height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--border-color);
+  border-radius: 15px;
+  background-color: var(--bg-color);
+}
+
+.matrix-result {
+  font: 700 1.2rem "Domine", serif;
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+/* Calculus Calculator */
+.calculus-calculator {
+  margin: 0 auto;
+  padding: 20px;
+  width: clamp(100px, 85vw, 600px);
+  background-color: var(--surface-color);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.calculus-mode {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  padding: 10px;
+}
+
+.calculus-mode-btn,
+.calculus-btn.calculate {
+  border: none;
+  border-radius: 5px;
+  font-family: "Domine", serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 10px 15px;
+}
+
+.calculus-btn.calculate {
+  margin: 10px;
+  padding: 10px 20px;
+}
+
+.calculus-mode-btn:hover,
+.calculus-btn.calculate:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.calculus-mode-btn:active,
+.calculus-btn.calculate:active {
+  transform: translateY(0);
+}
+
+.calculus-mode-btn.active,
+.calculus-btn.calculate:active {
+  background-color: var(--primary-color);
+  color: #fff;
+  box-shadow: var(--shadow-hover);
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.input-group label {
+  font-weight: 500;
+}
+
+.function-input {
+  min-width: 20px;
+  flex: 1;
+  padding: 10px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-family: "Noto Sans Math", sans-serif;
+  font-size: 1rem;
+}
+
+.integration-options {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.integration-type {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.limits-container {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.limit-input {
+  width: 60px;
+  padding: 10px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.help-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  padding: 10px;
+}
+
+.result-container {
+  font-family: "Noto Sans Math", sans-serif;
+  padding: 15px;
+  min-height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--border-color);
+  border-radius: 15px;
+  background-color: var(--bg-color);
+}
+
+.result {
+  font: 700 1.2rem "Domine", serif;
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+/* Extras */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
